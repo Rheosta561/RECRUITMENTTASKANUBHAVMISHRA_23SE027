@@ -64,13 +64,13 @@ export default function Navbar() {
             <Link href="/admin/Home" className="hover:text-primary transition-colors">Home</Link>
           </li>
           <li>
-            <Link href="/students" className="hover:text-primary transition-colors">Students</Link>
+            <Link href="/" className="hover:text-primary transition-colors">Students</Link>
           </li>
           <li>
-            <Link href="/companies" className="hover:text-primary transition-colors">Companies</Link>
+            <Link href="/" className="hover:text-primary transition-colors">Companies</Link>
           </li>
           <li>
-            <Link href="/notice" className="hover:text-primary transition-colors">Notice</Link>
+            <Link href="/" className="hover:text-primary transition-colors">Notice</Link>
           </li>
         </ul>
 
