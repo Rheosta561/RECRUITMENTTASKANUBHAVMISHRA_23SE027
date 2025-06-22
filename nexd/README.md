@@ -16,6 +16,26 @@ Accessible via the shareable link
 Automatically uses the token in the URL to fetch student data
 Displays the data in a clean, readable table
 Implements a basic email filter for search functionality
+## 🔐 Token Signing & Verification
+1. The flow of secure data access is:
+
+- Sign the student key using HMAC with a server-side secret:
+
+- The backend signs the student data (e.g., roll number or ID) using a SHARE_SECRET.
+
+- The signed token is then encoded in Base64URL and returned to the admin as a share link.
+
+2. Verify the token on the client-accessed page:
+
+- The public share page extracts the token (shareToken) from the URL.
+
+- It makes a POST request to /api/verifyToken to validate the token signature using the same secret.
+
+- If valid, the original student key (contained in the token) is used to make a request to /share?shareToken=... to fetch the actual student data.
+
+- ✅ This ensures the data is only accessible if the token has not been tampered with.
+
+
 ## 📸 Preview
 
 ![NexD Preview](https://drive.google.com/file/d/1Uabs1fb9FoBt9Mreql3OqiUrA5FBnfsC/view?usp=sharing)
