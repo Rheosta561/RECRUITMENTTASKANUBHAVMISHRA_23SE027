@@ -92,7 +92,7 @@ export default function Page() {
 
     console.log('Share token status ' , response.status);
     const shareToken = response.data.shareToken;
-    const generatedUrl = `http://localhost:3000/share?shareToken=${shareToken}`
+    const generatedUrl = `https://tnptaskanubhavmishra-23-se-027-4361.vercel.app/share?shareToken=${shareToken}`
     setGeneratedLink(generatedUrl);
   } catch (error) {
     console.error('Failed to generate link:', error);
