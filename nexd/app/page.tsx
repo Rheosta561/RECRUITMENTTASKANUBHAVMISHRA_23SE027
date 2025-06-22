@@ -15,7 +15,7 @@ export default function Page() {
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 mt-6">
-        <Link href="/admin/Home">
+        <Link href="/admin/login">
           <Button>Go to Admin Portal</Button>
         </Link>
 
