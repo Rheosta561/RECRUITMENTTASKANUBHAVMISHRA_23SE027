@@ -16,6 +16,7 @@ import axios from 'axios';
 import { Progress } from '@/components/ui/progress';
 import { Input } from '@/components/ui/input';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { verifyToken } from '@/lib/verifyToken';
 
 interface Student {
   first_name: string;
@@ -59,9 +60,14 @@ export default function Page() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        if (!shareToken) return;
-        const response = await axios.get(`${baseUrl}/share?shareToken=${shareToken}`);
-        setStudents(response.data);
+
+
+        const tokenResponse = await axios.post('/api/verifyToken' , {token:shareToken});
+        const decryptedToken = tokenResponse.data;
+        console.log(decryptedToken)
+        const studentResponse = await axios.get(`${baseUrl}/share?shareToken=${decryptedToken.data}`)
+        console.log(studentResponse);
+        setStudents(studentResponse.data);
       } catch (error) {
         console.error('Failed to fetch students:', error);
       } finally {

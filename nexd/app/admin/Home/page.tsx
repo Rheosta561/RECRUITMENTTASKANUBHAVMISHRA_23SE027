@@ -9,6 +9,8 @@ import { useUser } from '@/context/UserContext';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { headers } from 'next/headers';
+import { sign } from 'crypto';
+import { signPayload } from '@/lib/signToken';
 
 export default function Page() {
   const [generatedLink, setGeneratedLink] = useState('');
@@ -92,7 +94,18 @@ export default function Page() {
 
     console.log('Share token status ' , response.status);
     const shareToken = response.data.shareToken;
-    const generatedUrl = `https://anubhavmishra-recruitment.vercel.app/share?shareToken=${shareToken}`
+
+ 
+    const shareTokenResponse = await axios.get(`${baseUrl}/share?shareToken=${shareToken}`);
+    console.log(shareTokenResponse);
+
+  
+
+    const res = await axios.post('/api/signToken',{data:shareToken});
+    console.log('response');
+
+    const {token} = await res.data;
+    const generatedUrl = `https://anubhavmishra-recruitment.vercel.app/share?shareToken=${token}`;
     setGeneratedLink(generatedUrl);
   } catch (error) {
     console.error('Failed to generate link:', error);
